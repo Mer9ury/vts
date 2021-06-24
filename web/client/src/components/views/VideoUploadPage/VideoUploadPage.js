@@ -64,6 +64,18 @@ function VideoUploadPage() {
                 }
             })
 
+
+    }
+
+    const onClick = (e) =>{
+        Axios.get('/api/video/getMusic').then(response=>
+    {
+        var musics = response.data.music;
+        for (let step = 0; step < musics.length;step++){
+            console.log(response.data.music[step]);
+        }
+        
+    })
     }
 
     return (
@@ -127,7 +139,7 @@ function VideoUploadPage() {
 
                 <br />
                 <br />
-                <Button type="primary" size="large" onClick>
+                <Button type="primary" size="large" onClick ={onClick}>
                     Submit
                 </Button>
 

@@ -71,8 +71,14 @@ function VideoUploadPage() {
         Axios.get('/api/video/getMusic').then(response=>
     {
         var musics = response.data.music;
+        var start = response.data.start;
+        var end = response.data.end;
         for (let step = 0; step < musics.length;step++){
-            console.log(response.data.music[step]);
+            console.log(musics[step]);
+        }
+
+        for (let step = 0; step < start.length;step++){
+            console.log(start[step],end[step]);
         }
         
     })

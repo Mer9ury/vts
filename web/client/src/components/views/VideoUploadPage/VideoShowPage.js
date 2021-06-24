@@ -113,7 +113,7 @@ function VideoShowPage() {
                     </Dropzone>
                     { }
                     <div>
-                        <img src="..\test.png" alt="Test" />
+                        <img src="test.png" alt="Test" />
                     </div>
 
                 </div>

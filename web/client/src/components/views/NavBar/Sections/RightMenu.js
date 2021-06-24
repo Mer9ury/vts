@@ -33,8 +33,14 @@ function RightMenu(props) {
   } else {
     return (
       <Menu mode={props.mode}>
+        <Menu.Item key="sub">
+          <a href="/video/sub">Sub</a>
+        </Menu.Item>
+        <Menu.Item key="show">
+          <a href="/video/show">Show</a>
+        </Menu.Item>
         <Menu.Item key="upload">
-          <a href="/video/upload">Signup</a>
+          <a href="/video/upload">Upload</a>
         </Menu.Item>
         <Menu.Item key="logout">
           <a onClick={logoutHandler}>Logout</a>

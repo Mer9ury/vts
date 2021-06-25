@@ -59,8 +59,7 @@ router.post("/uploadVideo", (req, res) => {
 
 router.post("/uploadfiles", (req, res) => {
 
-    const music = new Music({artist: "IU", title: "Lilac", link:"www.youtube.com2", path:"uploads/I2U.jpg"});
-
+    const music = new Music({artist: "IU", title: "Lilacasdfsa", link:"www.youtube.com2", path:"uploads/I3U.jpg"});
     music.save();
 
 
@@ -76,7 +75,6 @@ router.post("/uploadfiles", (req, res) => {
 
 router.get("/getMusic", (req, res) => {
 
-    let result = {};
     Music.find({}, function(err, musics) {
         if (!err) { 
             return res.json({music:musics, start:['00:12','04:24'], end:['01:35','06:01']})

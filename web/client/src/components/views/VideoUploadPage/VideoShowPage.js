@@ -67,20 +67,19 @@ function VideoShowPage() {
 
     }
 
-    const onClick = (e) =>{
-        Axios.get('/api/video/getMusic').then(response=>
-    {
-        var musics = response.data.music;
-        var start = response.data.start;
-        var end = response.data.end;
-        for (let step = 0; step < musics.length;step++){
-            console.log(response.data.music[step]);
-        }
-        for (let step = 0; step < start.length;step++){
-            console.log(start[step],end[step]);
-        }
-        
-    })
+    const onClick = (e) => {
+        Axios.get('/api/video/getMusic').then(response => {
+            var musics = response.data.music;
+            var start = response.data.start;
+            var end = response.data.end;
+            for (let step = 0; step < musics.length; step++) {
+                console.log(response.data.music[step]);
+            }
+            for (let step = 0; step < start.length; step++) {
+                console.log(start[step], end[step]);
+            }
+
+        })
     }
 
     return (
@@ -112,8 +111,10 @@ function VideoShowPage() {
 
                     </Dropzone>
                     { }
-                    <div>
-                        <img src="test.png" alt="Test" />
+                    <div >
+                        <img src='test.png' style = {{
+                        width: '300px'
+                    }} alt="Test" />
                     </div>
 
                 </div>
@@ -135,32 +136,33 @@ function VideoShowPage() {
                 <br />
 
                 <label>Recommended Songs</label>
-                <div class = "song_list" style={{
-                                width: '700px', height: '600px', border: '1px solid lightgray', display: 'flex',
-                                alignItems: 'center', justifyContent: 'flex-start', flex:1, flexDirection: 'column',
-                                paddingTop: '30px'
-                            }}>
-                <div class="song_info" style={{
-                                width: '670px', height: '50px', border: '1px solid lightgray', display: 'flex',
-                                alignItems: 'center', justifyContent: 'center', marginBottom: '30px'
-                            }}>
-                    <img></img>
-                    <div class="song_name">뀨잇</div>
-                    <div class="singer">뀨뀨잇</div>
-                </div>
-                <div class="song_info" style={{
-                                width: '670px', height: '50px', border: '1px solid lightgray', display: 'flex',
-                                alignItems: 'center', justifyContent: 'center', marginBottom: '30px'
-                            }}>
-                    <img></img>
-                    <div class="song_name">뀨잇</div>
-                    <div class="singer">뀨뀨잇</div>
-                </div>
+                <div class="song_list" style={{
+                    width: '700px', height: '600px', border: '1px solid lightgray', display: 'flex',
+                    alignItems: 'center', justifyContent: 'flex-start', flex: 1, flexDirection: 'column',
+                    paddingTop: '30px'
+                }}>
+                    <div class="song_info" style={{
+                        width: '670px', height: '50px', border: '1px solid lightgray', display: 'flex',
+                        alignItems: 'center', justifyContent: 'center', marginBottom: '30px'
+                    }}>
+                        <img></img>
+                        <div class="song_name">뀨잇</div>
+                    
+                        <div class="singer">뀨뀨잇</div>
+                    </div>
+                    <div class="song_info" style={{
+                        width: '670px', height: '50px', border: '1px solid lightgray', display: 'flex',
+                        alignItems: 'center', justifyContent: 'center', marginBottom: '30px'
+                    }}>
+                        <img></img>
+                        <div class="song_name">뀨잇</div>
+                        <div class="singer">뀨뀨잇</div>
+                    </div>
                 </div>
 
                 <br />
                 <br />
-                <Button type="primary" size="large" onClick ={onClick}>
+                <Button type="primary" size="large" onClick={onClick}>
                     Submit
                 </Button>
 

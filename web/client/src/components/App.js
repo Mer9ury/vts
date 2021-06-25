@@ -10,6 +10,7 @@ import Footer from "./views/Footer/Footer"
 import VideoUploadPage from './views/VideoUploadPage/VideoUploadPage';
 import VideoShowPage from './views/VideoUploadPage/VideoShowPage';
 import VideoSub from './views/VideoUploadPage/VideoSub';
+import VideoDetailPage from './views/VideoDetailPage/VideoDetailPage';
 //null   Anyone Can go inside
 //true   only logged in user can go inside
 //false  logged in user can't go inside
@@ -26,6 +27,7 @@ function App() {
           <Route exact path="/video/upload" component={Auth(VideoUploadPage, true)} />
           <Route exact path="/video/show" component={Auth(VideoShowPage, true)} />
           <Route exact path="/video/sub" component={Auth(VideoSub, true)} />
+          <Route exact path="/video/:videoId" component={Auth(VideoDetailPage, null)} />
         </Switch>
       </div>
       <Footer />

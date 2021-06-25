@@ -24,6 +24,7 @@ function VideoSub() {
     const onArtistChange = (e) => {
         setMusicArtist(e.currentTarget.value)
     }
+    
 
     const onTitleChange = (e) => {
         setMusicTitle(e.currentTarget.value)

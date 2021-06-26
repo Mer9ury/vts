@@ -8,7 +8,7 @@ const multer = require("multer");
 
 var storage = multer.diskStorage({
     destination: (req, file, cb) => {
-        cb(null, 'uploads/')
+        cb(null, 'client/public/video')
     },
     filename: (req, file, cb) => {
         cb(null, `${Date.now()}_${file.originalname}`)
@@ -49,6 +49,7 @@ router.post("/uploadVideo", (req, res) => {
     const video = new Video(req.body)
 
     video.save((err, doc) => {
+        console.log(doc)
         if(err) return res.status(400).json({ success: false, err })
         return res.status(200).json({
             success: true 
@@ -59,17 +60,16 @@ router.post("/uploadVideo", (req, res) => {
 
 router.post("/uploadfiles", (req, res) => {
 
-    const music = new Music({artist: "IU", title: "Lilac", link:"www.youtube.com2", path:"uploads/I2U.jpg"});
+    // const music = new Music({artist: "IU", title: "Lilac", link:"www.youtube.com2", path:"uploads/I2U.jpg"});
 
-    music.save();
+    // music.save();
 
 
     upload(req, res, err => {
-        console.log(res)
         if (err) {
             return res.json({ success: false, err })
         }
-        return res.json({ success: true, url: res.req.file.path, fileName: res.req.file.filename })
+        return res.json({ success: true, filePath: res.req.file.path, fileName: res.req.file.filename })
     })
 
 });
@@ -96,6 +96,16 @@ router.get("/getVideos", (req, res) => {
             res.status(200).json({ success: true, videos })
         })
 
+});
+router.post("/getVideoDetail", (req, res) => {
+    console.log(req.body)
+    Video.findOne({ "_id" : req.body.videoId })
+    .populate('writer')
+    .exec((err, videoDetail) => {
+        console.log(videoDetail)
+        if(err) return res.status(400).send(err);
+        res.status(200).json({ success: true, videoDetail })
+    })
 });
 
 module.exports = router;

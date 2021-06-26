@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Typography, Button, Form, message, Input, Icon } from 'antd';
 import Dropzone from 'react-dropzone';
 import Axios from 'axios';
@@ -13,14 +13,11 @@ const PrivateOptions = [
 ]
 
 
-function VideoUploadPage() {
-    const user = useSelector(state => state.user);
+function VideoShowPage() {
+
     const [VideoTitle, setVideoTitle] = useState("")
     const [Description, setDescription] = useState("")
-    const [FP,setFP] = useState("")
-    const [FilePath, setFilePath] = useState("")
     const [Private, setPrivate] = useState(0)
-    
 
     const onTitleChange = (e) => {
         setVideoTitle(e.currentTarget.value)
@@ -32,7 +29,6 @@ function VideoUploadPage() {
 
     const onPrivateChange = (e) => {
         setPrivate(e.currentTarget.value)
-        
     }
 
     const onDrop = (files) => {
@@ -41,48 +37,33 @@ function VideoUploadPage() {
             header: { 'content-type': 'multipart/form-data' }
         }
         formData.append("file", files[0])
+
         Axios.post('/api/video/uploadfiles', formData, config)
             .then(response => {
                 if (response.data.success) {
-                    console.log(response.data.filePath)
-                    setFP(response.data.filePath)
+
+                    let variable = {
+                        filePath: response.data.filePath,
+                        fileName: response.data.fileName
+                    }
+                    // setFilePath(response.data.filePath)
+
+                    // Axios.post('/api/video/thumbnail', variable)
+                    //     .then(response => {
+                    //         if (response.data.success) {
+                    //             setDuration(response.data.fileDuration)
+                    //             setThumbnail(response.data.thumbsFilePath)
+                    //         } else {
+                    //             alert('Failed to make the thumbnails');
+                    //         }
+                    //     })
+
+
                 } else {
                     alert('failed to save the video in server')
                 }
-                
             })
 
-
-    }
-    const onSubmit = (event) => {
-        event.preventDefault();
-        if (user.userData && !user.userData.isAuth) {
-            return alert('Please Log in First')
-        }
-
-
-        if (VideoTitle === "" || Description === "" ||
-            FP === "") {
-            return alert('Successful')
-        }
-
-        const variables = {
-            writer: user.userData._id,
-            title: VideoTitle,
-            description: Description,
-            privacy: Private,
-            filePath: FP
-        }
-
-        Axios.post('/api/video/uploadVideo', variables)
-            .then(response => {
-                if (response.data.success) {
-                    alert('video Uploaded Successfully')
-                    //props.history.push('/')
-                } else {
-                    alert('Failed to upload video')
-                }
-            })
 
     }
 
@@ -90,8 +71,13 @@ function VideoUploadPage() {
         Axios.get('/api/video/getMusic').then(response=>
     {
         var musics = response.data.music;
+        var start = response.data.start;
+        var end = response.data.end;
         for (let step = 0; step < musics.length;step++){
             console.log(response.data.music[step]);
+        }
+        for (let step = 0; step < start.length;step++){
+            console.log(start[step],end[step]);
         }
         
     })
@@ -103,8 +89,10 @@ function VideoUploadPage() {
 
             </div>
 
-            <Form onSubmit={onSubmit}>
+            <Form onSubmit>
                 <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                    { }
+
                     <Dropzone
                         onDrop={onDrop}
                         multiple={false}
@@ -123,6 +111,11 @@ function VideoUploadPage() {
                         )}
 
                     </Dropzone>
+                    { }
+                    <div>
+                        <img src="test.png" alt="Test" />
+                    </div>
+
                 </div>
                 <br />
                 <br />
@@ -141,17 +134,33 @@ function VideoUploadPage() {
                 <br />
                 <br />
 
-                <select onChange={onPrivateChange}>
-
-                    {PrivateOptions.map((item, index) => (
-                        <option key={index} value={item.value}>{item.label}</option>
-                    ))}
-
-                </select>
+                <label>Recommended Songs</label>
+                <div class = "song_list" style={{
+                                width: '700px', height: '600px', border: '1px solid lightgray', display: 'flex',
+                                alignItems: 'center', justifyContent: 'flex-start', flex:1, flexDirection: 'column',
+                                paddingTop: '30px'
+                            }}>
+                <div class="song_info" style={{
+                                width: '670px', height: '50px', border: '1px solid lightgray', display: 'flex',
+                                alignItems: 'center', justifyContent: 'center', marginBottom: '30px'
+                            }}>
+                    <img></img>
+                    <div class="song_name">뀨잇</div>
+                    <div class="singer">뀨뀨잇</div>
+                </div>
+                <div class="song_info" style={{
+                                width: '670px', height: '50px', border: '1px solid lightgray', display: 'flex',
+                                alignItems: 'center', justifyContent: 'center', marginBottom: '30px'
+                            }}>
+                    <img></img>
+                    <div class="song_name">뀨잇</div>
+                    <div class="singer">뀨뀨잇</div>
+                </div>
+                </div>
 
                 <br />
                 <br />
-                <Button type="primary" size="large" onClick ={onSubmit}>
+                <Button type="primary" size="large" onClick ={onClick}>
                     Submit
                 </Button>
 
@@ -162,4 +171,4 @@ function VideoUploadPage() {
     )
 }
 
-export default VideoUploadPage
+export default VideoShowPage

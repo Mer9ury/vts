@@ -112,7 +112,7 @@ function VideoShowPage() {
                     </Dropzone>
                     { }
                     <div >
-                        <img src='test.png' style = {{
+                        <img src='/img/test.png' style = {{
                         width: '300px'
                     }} alt="Test" />
                     </div>
@@ -147,7 +147,9 @@ function VideoShowPage() {
                     }}>
                         <img></img>
                         <div class="song_name">뀨잇</div>
-                    
+                    <br />
+                    <br />
+                    <br />
                         <div class="singer">뀨뀨잇</div>
                     </div>
                     <div class="song_info" style={{
